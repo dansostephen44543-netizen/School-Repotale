@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#102b52">
+  <title>School Results Portal</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="School Results Portal home">
+      <span class="brand-mark">SR</span>
+      <span><strong>Results Portal</strong><small>Student • Teacher • School</small></span>
+    </a>
+    <nav>
+      <button class="nav-link active" data-view="check">Check Results</button>
+      <button class="nav-link" data-view="teacher">Teacher Portal</button>
+      <button class="nav-link" data-view="admin">School Admin</button>
+      <button class="nav-link" data-view="about">How it works</button>
+    </nav>
+  </header>
+
+  <section class="global-search-shell" aria-label="Search the website">
+    <form id="global-search-form" class="global-search-form" role="search">
+      <span class="global-search-icon" aria-hidden="true">⌕</span>
+      <label class="sr-only" for="global-search-input">Search anything on this website</label>
+      <input id="global-search-input" type="search" autocomplete="off" placeholder="Search anything on this website — subjects, features, schools…" aria-controls="global-search-results" aria-expanded="false">
+      <button type="submit" class="primary global-search-button">Search</button>
+    </form>
+    <div id="global-search-results" class="global-search-results" role="region" aria-label="Search results" hidden></div>
+    <p class="global-search-hint">Search portal pages, instructions, subjects and school names. Private student records are searchable only inside the signed-in school workspace.</p>
+  </section>
+  <datalist id="ghana-schools"></datalist>
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <span class="eyebrow">ACADEMIC RESULTS, MADE SIMPLE</span>
+        <h1>Your results.<br><span>One secure place.</span></h1>
+        <p>Check published JHS and SHS results with your student details, or sign in as a teacher to enter and publish marks.</p>
+        <div class="hero-actions">
+          <button class="primary" data-goto="check">Check results <span>→</span></button>
+          <button class="secondary" data-goto="teacher">Teacher sign in</button>
+        </div>
+        <div class="trust-note"><span class="dot"></span> Demo portal — sample data only</div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+        <div class="result-card">
+          <div class="result-card-head"><span class="mini-mark">SR</span><span class="status">RESULT PREVIEW</span></div>
+          <div class="avatar">ST</div>
+          <div class="skeleton name-line"></div><div class="skeleton short-line"></div>
+          <div class="grade-row"><span>English Language</span><b>B2</b></div>
+          <div class="grade-row"><span>Mathematics</span><b>A1</b></div>
+          <div class="grade-row"><span>Integrated Science</span><b>B3</b></div>
+          <div class="card-foot"><span>Sample preview</span><span>•••• 2048</span></div>
+        </div>
+        <div class="floating-badge"><span>✓</span> Results made easy</div>
+      </div>
+    </section>
+
+    <section class="content-area">
+      <div class="section-heading">
+        <div><span class="eyebrow">PORTAL</span><h2 id="section-title">Check your results</h2></div>
+        <p id="section-subtitle">Enter the details provided by your school.</p>
+      </div>
+
+      <section class="panel" id="view-check">
+        <div class="panel-intro">
+          <div class="panel-icon">▤</div>
+          <div><h3>JHS / SHS student result checker</h3><p>Choose your school year, class and term, then enter the student ID and result PIN.</p></div>
+        </div>
+        <form id="check-form" class="form-grid">
+          <label>School name (JHS or SHS)<input id="check-school" list="ghana-schools" required placeholder="Choose or type any school name" autocomplete="organization"><span class="helper">Suggestions are not a complete national register. You can type any school name. <a href="https://ges.gov.gh/schools.php" target="_blank" rel="noopener">Search the GES school directory</a></span></label>
+          <label>Class<select id="check-year" required><option value="JHS 1">JHS 1</option><option value="JHS 2">JHS 2</option><option value="JHS 3">JHS 3</option><option value="SHS 1">SHS 1</option><option value="SHS 2">SHS 2</option><option value="SHS 3">SHS 3</option></select></label>
+          <label>Academic year<select id="check-academic-year" required></select></label>
+          <label>Term<select id="check-semester" required><option value="First Term">First Term</option><option value="Second Term" selected>Second Term</option><option value="Third Term">Third Term</option></select></label>
+          <label>Student ID<input id="student-id" required placeholder="e.g. STU2026001" autocomplete="off"></label>
+          <label>Result PIN<input id="result-pin" required placeholder="Enter your result PIN" autocomplete="off"></label>
+          <div class="form-actions"><button class="primary" type="submit">Check result <span>→</span></button><span class="helper">Demo: Accra New Town Experimental '1' J.H.S. · STU2026001 / 123456</span></div>
+        </form>
+        <div id="result-message" class="message" role="status" hidden></div>
+        <p class="small-note">A student photo appears when the school administrator has registered it for that Student ID.</p>
+        <div id="result-output" hidden></div>
+      </section>
+
+      <section class="panel" id="view-teacher" hidden>
+        <div id="teacher-login">
+          <div class="panel-intro"><div class="panel-icon">✎</div><div><h3>Teacher sign in</h3><p>Sign in to enter marks and publish student results.</p></div></div>
+          <form id="teacher-login-form" class="form-grid">
+            <label>School name (JHS or SHS)<input id="teacher-school" list="ghana-schools" required placeholder="Choose or type any school name" autocomplete="organization"><span class="helper">Suggestions are not a complete national register. You can type any school name. <a href="https://ges.gov.gh/schools.php" target="_blank" rel="noopener">Search the GES school directory</a></span></label>
+            <label>Teacher username<input id="teacher-user" required placeholder="Username" autocomplete="username"></label>
+            <label>Password<input id="teacher-password" type="password" required placeholder="Password" autocomplete="current-password"></label>
+            <div class="form-actions"><button class="primary" type="submit">Sign in <span>→</span></button><span class="helper">Demo: teacher / demo123</span></div>
+          </form>
+          <div id="teacher-login-message" class="message" role="status" hidden></div>
+        </div>
+        <div id="teacher-workspace" hidden>
+          <div class="workspace-head"><div><h3>Teacher workspace</h3><p>School: <strong id="teacher-current-school"></strong>. Add a student or update an existing student's subject scores.</p></div><button class="secondary small" id="teacher-logout">Sign out</button></div>
+          <form id="entry-form" class="form-grid">
+            <label>Student full name<input id="entry-name" required placeholder="Full name"></label>
+            <label>Student ID<input id="entry-id" required placeholder="e.g. STU2026002" autocomplete="off"></label>
+            <div class="profile-match" id="teacher-profile-match" hidden></div>
+            <label>Result PIN<input id="entry-pin" required minlength="4" placeholder="Create a PIN"></label>
+            <label>Exam type / class<input id="entry-exam" required value="End-of-Term Examination" placeholder="e.g. Mid-term, End-of-Term"></label>
+            <label>Class<select id="entry-year" required><option value="JHS 1">JHS 1</option><option value="JHS 2">JHS 2</option><option value="JHS 3">JHS 3</option><option value="SHS 1">SHS 1</option><option value="SHS 2">SHS 2</option><option value="SHS 3">SHS 3</option></select></label>
+            <label>Academic year<select id="entry-academic-year" required></select></label>
+            <label>Term<select id="entry-semester" required><option value="First Term">First Term</option><option value="Second Term">Second Term</option><option value="Third Term">Third Term</option></select></label>
+            <label>School pass mark (reference only)<input id="entry-pass-mark" type="number" min="0" max="100" step="1" value="50" required><span class="helper">Pass status follows the grade: A1–C6 credit pass, D7–E8 pass (non-credit), F9 fail.</span></label>
+            <div class="subject-entry">
+              <div class="subject-entry-title"><strong>Subject scores</strong><span>Enter scores from 0 to 100</span></div>
+              <div id="score-fields" class="score-grid"></div>
+            </div>
+            <label class="checkbox-label"><input type="checkbox" id="publish-result"> Publish result for student checking</label>
+            <div class="form-actions"><button class="primary" type="submit">Save result <span>→</span></button><button class="secondary" type="button" id="clear-form">Clear form</button></div>
+          </form>
+          <div id="entry-message" class="message" role="status" hidden></div>
+          <div class="dashboard-stats" aria-label="Results summary">
+            <div class="stat-card"><span>Total records</span><strong id="stat-total">0</strong></div>
+            <div class="stat-card"><span>Published</span><strong id="stat-published">0</strong></div>
+            <div class="stat-card"><span>Drafts</span><strong id="stat-drafts">0</strong></div>
+            <div class="stat-card"><span>Student profiles</span><strong id="stat-profiles">0</strong></div>
+          </div>
+          <div class="table-toolbar"><label class="search-label">Search result records<input id="record-search" type="search" placeholder="Search name, ID or exam…"></label><button class="secondary small" id="download-all-results" type="button">Download all results (CSV)</button><button class="secondary small" id="backup-data" type="button">Back up records</button><button class="secondary small" id="restore-data" type="button">Restore backup</button><input id="restore-file" type="file" accept="application/json,.json" hidden></div>
+          <div class="table-wrap"><table><thead><tr><th>Student</th><th>ID</th><th>Class / Term</th><th>Exam</th><th>Status</th><th>Action</th></tr></thead><tbody id="student-table"></tbody></table></div>
+          <p class="small-note">Records are saved in this browser. Back up records regularly and keep the backup file somewhere safe. Browser data can be lost if site data is cleared or the device is reset. This demo does not sync records between devices.</p>
+        </div>
+      </section>
+
+      <section class="panel" id="view-admin" hidden>
+        <div id="admin-login">
+          <div class="panel-intro"><div class="panel-icon">♙</div><div><h3>School administrator sign in</h3><p>Register student names, IDs, dates of birth and official profile photos for JHS and SHS teachers and students to use.</p></div></div>
+          <form id="admin-login-form" class="form-grid">
+            <label>School name (JHS or SHS)<input id="admin-school" list="ghana-schools" required placeholder="Choose or type any school name" autocomplete="organization"><span class="helper">Suggestions are not a complete national register. You can type any school name. <a href="https://ges.gov.gh/schools.php" target="_blank" rel="noopener">Search the GES school directory</a></span></label>
+            <label>Admin username<input id="admin-user" required placeholder="School admin username" autocomplete="username"></label>
+            <label>Password<input id="admin-password" type="password" required placeholder="Password" autocomplete="current-password"></label>
+            <div class="form-actions"><button class="primary" type="submit">Admin sign in <span>→</span></button><span class="helper">Demo: schooladmin / admin123</span></div>
+          </form>
+          <div id="admin-login-message" class="message" role="status" hidden></div>
+        </div>
+        <div id="admin-workspace" hidden>
+          <div class="workspace-head"><div><h3>Student photo directory</h3><p>School: <strong id="admin-current-school"></strong>. Upload one photo for each student and register it using the student's exact ID.</p></div><button class="secondary small" id="admin-logout" type="button">Sign out</button></div>
+          <section class="emblem-settings" aria-labelledby="emblem-heading">
+            <div><h3 id="emblem-heading">School emblem</h3><p>Upload your school's crest or emblem. It will appear on students' on-screen results and printable result slips.</p></div>
+            <div class="emblem-controls"><div class="emblem-preview-wrap"><img id="school-emblem-preview" alt="School emblem preview" hidden><div id="school-emblem-placeholder" class="photo-placeholder">Emblem preview</div></div><label class="upload-label">Emblem image<input id="school-emblem-file" type="file" accept="image/*"><span class="helper">Choose a clear JPG, PNG or WebP image.</span></label></div>
+            <div class="form-actions"><button class="primary" type="button" id="save-school-emblem">Save school emblem</button><button class="secondary" type="button" id="remove-school-emblem">Remove emblem</button></div>
+            <div id="emblem-message" class="message" role="status" hidden></div>
+          </section>
+          <form id="profile-form" class="form-grid">
+            <label>Student full name<input id="profile-name" required placeholder="Student full name"></label>
+            <label>Student ID<input id="profile-id" required placeholder="e.g. STU2026001"></label>
+            <label>Date of birth<input id="profile-dob" type="date" required></label>
+            <label class="upload-label">Student photo (from files)<input id="profile-photo-file" type="file" accept="image/*"><span class="helper">Choose a clear JPG, PNG or WebP photo.</span></label>
+            <div class="photo-preview-wrap"><img id="profile-photo-preview" alt="Selected student photo preview" hidden><div id="profile-photo-placeholder" class="photo-placeholder">Photo preview</div></div>
+            <div class="form-actions"><button class="primary" type="submit">Save student profile <span>→</span></button><button class="secondary" type="button" id="profile-clear">Clear form</button></div>
+          </form>
+          <div id="profile-message" class="message" role="status" hidden></div>
+          <div class="directory-heading"><h3>Registered students</h3><span id="profile-count" class="helper">0 profiles</span></div>
+          <div class="directory-toolbar"><label class="search-label">Find a student<input id="profile-search" type="search" placeholder="Search by name or Student ID…"></label><button class="secondary small" id="download-profiles" type="button">Export directory (CSV)</button></div>
+          <div id="student-directory" class="student-directory"></div>
+          <p class="small-note">Demo limitation: photos and profiles are saved in this browser only. To share them across different phones or computers, the portal needs a secure online database and file storage.</p>
+        </div>
+      </section>
+
+      <section class="panel about-panel" id="view-about" hidden>
+        <div class="panel-intro"><div class="panel-icon">i</div><div><h3>How this portal works</h3><p>A school-managed results portal inspired by the general result-checking workflow.</p></div></div>
+        <div class="steps">
+          <div><span>01</span><h4>Teachers enter scores</h4><p>The school administrator registers student IDs, names and photos. Teachers record subject scores and publication status.</p></div>
+          <div><span>02</span><h4>Results are published</h4><p>Only results marked as published can be viewed through the student checker.</p></div>
+          <div><span>03</span><h4>Students check privately</h4><p>Students enter their ID and result PIN to view the result available for that account.</p></div>
+        </div>
+        <div class="notice"><strong>Important:</strong> This is an independent demo, not an official WAEC website and not connected to WAEC systems. It cannot retrieve official WASSCE results.</div>
+      </section>
+    </section>
+  </main>
+  <footer><div class="brand footer-brand"><span class="brand-mark">SR</span><span><strong>Results Portal</strong><small>Independent school demo</small></span></div><div class="footer-meta"><span>Built for school-managed results • Demo version</span><span class="creator-credit">Made by <strong>shadowchaser2234</strong></span></div></footer>
+  <script src="app.js"></script>
+</body>
+</html>
